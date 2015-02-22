@@ -1,7 +1,9 @@
 package notepad;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,6 +14,7 @@ public class RunNotepad {
     public static ArrayList<User> usersList = new ArrayList<User>();
     public static Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
+        loadFromFile();
 
         int option = 0;
 
@@ -86,6 +89,33 @@ public class RunNotepad {
         } while (!conditie);
     }
 
+
+private static void loadFromFile(){
+    try {
+        FileReader readFromFile = new FileReader("users.txt");
+        BufferedReader buffer = new BufferedReader(readFromFile);
+        if(buffer != null) {
+            String oneLine = buffer.readLine();
+            while (oneLine != null) {
+                List<String> chopedLine = Arrays.asList(oneLine.split(","));
+                if(chopedLine != null) {
+                    User userFromFile = new User();
+                    userFromFile.setUserName(chopedLine.get(0));
+                    userFromFile.setPassword(chopedLine.get(1));
+                    usersList.add(userFromFile);
+                }
+                oneLine = buffer.readLine();
+            }
+
+        }
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+}
 
 }
 
