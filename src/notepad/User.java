@@ -4,6 +4,9 @@ package notepad;
  * Created by Ana on 2/21/2015.
  */
 public class User {
+    private String userName;
+    private String password;
+
     public String getPassword() {
         return password;
     }
@@ -20,10 +23,9 @@ public class User {
         this.userName = userName;
     }
 
-    private String userName;
-    private String password;
-
-
+    public String toString() {
+        return userName + "///" + password;
+    }
 
 
 }
